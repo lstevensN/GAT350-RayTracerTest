@@ -17,7 +17,7 @@ public:
 
 	void Render(class Canvas& canvas, int numSamples, int depth);
 	//color3_t Trace(const ray_t& ray);
-	color3_t Trace(const ray_t& ray, float minDistance, float maxDistance, raycastHit_t& raycastHit);
+	color3_t Trace(const ray_t& ray, float minDistance, float maxDistance, raycastHit_t& raycastHit, int depth);
 
 	void SetCamera(std::shared_ptr<class Camera> camera) { m_camera = camera; }
 	void AddObject(std::unique_ptr<Object> object) { m_objects.push_back(std::move(object)); }

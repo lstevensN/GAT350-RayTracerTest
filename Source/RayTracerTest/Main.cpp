@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 	const int width = 400;
 	const int height = 300;
 	const int samples = 1;
-	const int depth = 2;
+	const int depth = 3;
 
 	std::cout << "Hello World\n";
 
