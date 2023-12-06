@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 {
 	const int width = 400;
 	const int height = 300;
-	const int samples = 10;
+	const int samples = 50;
 	const int depth = 2;
 
 	std::cout << "Hello World\n";
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	Canvas canvas(width, height, renderer);
 
 	float aspectRatio = canvas.GetSize().x / (float)canvas.GetSize().y;
-	std::shared_ptr<Camera> camera = std::make_shared<Camera>(glm::vec3{ 0, 0, 3 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 0, 1, 0 }, 70.0f, aspectRatio);
+	std::shared_ptr<Camera> camera = std::make_shared<Camera>(glm::vec3{ 0, 0, 2 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 0, 1, 0 }, 70.0f, aspectRatio);
 
 	Scene scene; // sky color could be set with the top and bottom color
 	scene.SetCamera(camera);
@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
 	// create objects -> add to scene
 	for (int i = 0; i < 10; i++)
 	{
-		std::shared_ptr<Material> material = (rand() % 2) ? std::dynamic_pointer_cast<Material>(lambertian) : std::dynamic_pointer_cast<Material>(metal);
+		std::shared_ptr<Material> material = (true) ? std::dynamic_pointer_cast<Material>(lambertian) : std::dynamic_pointer_cast<Material>(metal);
 		auto sphere = std::make_unique<Sphere>(glm::vec3{ random(-5, 5), random(-4, 4), -6}, 1.0f, material);
 		scene.AddObject(std::move(sphere));
 	}
@@ -61,6 +61,9 @@ int main(int argc, char* argv[])
 	*/
 
 	// render scene
+	canvas.Clear({ 0, 0, 0, 1 });
+	scene.Render(canvas, samples, depth);
+	canvas.Update();
 
 	bool quit = false;
 	while (!quit)
@@ -88,9 +91,6 @@ int main(int argc, char* argv[])
 
 		renderer.PresentCanvas(canvas);*/
 
-		canvas.Clear({ 0, 0, 0, 1 });
-		scene.Render(canvas, samples, depth);
-		canvas.Update();
 		renderer.PresentCanvas(canvas);
 	}
 
