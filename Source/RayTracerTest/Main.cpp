@@ -46,13 +46,14 @@ int main(int argc, char* argv[])
 		material = (true) ? std::dynamic_pointer_cast<Material>(lambertian) : std::dynamic_pointer_cast<Material>(metal);
 		auto sphere = std::make_unique<Sphere>(glm::vec3{ random(-5, 5), random(-4, 4), -6}, 1.0f, material);
 		scene.AddObject(std::move(sphere));
-	}
-	*/
+	}*/
+	
 	material = std::make_shared<Lambertian>(color3_t{ 0.2f });
 	auto plane = std::make_unique<Plane>(glm::vec3{ 0, -4, 0 }, glm::vec3{ 0, 1, 0 }, material);
 	scene.AddObject(std::move(plane));
 
-	auto triangle = std::make_unique<Triangle>(glm::vec3{ 2, -2, -3 }, glm::vec3{ 0, 2, -3 }, glm::vec3{ -2, -2, -3 }, lambertian);
+	material = std::make_shared<Dielectric>(color3_t{ 0, 0, 1 }, 0.5f);
+	auto triangle = std::make_unique<Triangle>(glm::vec3{ 2, -2, -3 }, glm::vec3{ 0, 2, -3 }, glm::vec3{ -2, -2, -3 }, material);
 	scene.AddObject(std::move(triangle));
 
 	/*
