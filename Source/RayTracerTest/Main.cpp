@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Camera.h"
 #include "Canvas.h"
 #include "Material.h"
@@ -7,19 +6,26 @@
 #include "Scene.h"
 #include "Sphere.h"
 
+#include <iostream>
+
 using namespace std;
 
 int main(int argc, char* argv[])
 {
+	const int width = 400;
+	const int height = 300;
+	const int samples = 50;
+	const int depth = 2;
+
 	std::cout << "Hello World\n";
 
 	seedRandom((unsigned int)time(nullptr));
 
 	Renderer renderer;
 	renderer.Initialize();
-	renderer.CreateWindow("Ray Tracer", 400, 300);
+	renderer.CreateWindow("Ray Tracer", width, height);
 
-	Canvas canvas(400, 300, renderer);
+	Canvas canvas(width, height, renderer);
 
 	float aspectRatio = canvas.GetSize().x / (float)canvas.GetSize().y;
 	std::shared_ptr<Camera> camera = std::make_shared<Camera>(glm::vec3{ 0, 0, 1 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 0, 1, 0 }, 70.0f, aspectRatio);
@@ -39,18 +45,20 @@ int main(int argc, char* argv[])
 		scene.AddObject(std::move(sphere));
 	}
 
-	//// create material
-	//auto material = std::make_shared<Lambertian>(color3_t{ 0, 0, 1 });
+	/*
+	// create material
+	auto material = std::make_shared<Lambertian>(color3_t{ 0, 0, 1 });
 
-	//// create objects -> add to scene
-	//auto sphere = std::make_unique<Sphere>(glm::vec3{ 3.5f, 2, -5 }, 1.0f, material);
-	//scene.AddObject(std::move(sphere));
+	// create objects -> add to scene
+	auto sphere = std::make_unique<Sphere>(glm::vec3{ 3.5f, 2, -5 }, 1.0f, material);
+	scene.AddObject(std::move(sphere));
 
-	//sphere = std::make_unique<Sphere>(glm::vec3{ -0.5f, -4, -4 }, 1.0f, material);
-	//scene.AddObject(std::move(sphere));
+	sphere = std::make_unique<Sphere>(glm::vec3{ -0.5f, -4, -4 }, 1.0f, material);
+	scene.AddObject(std::move(sphere));
 
-	//sphere = std::make_unique<Sphere>(glm::vec3{ -2.5f, 0, -3 }, 1.0f, material);
-	//scene.AddObject(std::move(sphere));
+	sphere = std::make_unique<Sphere>(glm::vec3{ -2.5f, 0, -3 }, 1.0f, material);
+	scene.AddObject(std::move(sphere));
+	*/
 
 	bool quit = false;
 	while (!quit)
