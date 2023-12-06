@@ -33,9 +33,3 @@ inline glm::vec3 randomInUnitSphere()
 
 	return p;
 }
-
-inline bool approximately(float value1, float value2)
-{
-	// check if the difference between the values is less than epsilon
-	return fabs(value1 - value2) < FLT_EPSILON;
-}
