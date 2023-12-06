@@ -15,7 +15,7 @@ public:
 		m_bottomColor{ bottomColor }
 	{}
 
-	void Render(class Canvas& canvas);
+	void Render(class Canvas& canvas, int numSamples, int depth);
 	//color3_t Trace(const ray_t& ray);
 	color3_t Trace(const ray_t& ray, float minDistance, float maxDistance, raycastHit_t& raycastHit);
 

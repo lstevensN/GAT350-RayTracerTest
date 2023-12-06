@@ -7,21 +7,16 @@ inline void seedRandom(uint32_t seed)
 	srand(seed);
 }
 
-inline int random01()
+inline float random01()
 {
-	return rand() % RAND_MAX;
+	return rand() / (float)RAND_MAX;
 }
 
-inline int random(int min, int max)
+inline float random(int min, int max)
 {
 	if (min > max) std::swap(min, max);
 
-	int num;
-
-	do num = random01();
-	while (!(num > min && num < max));
-
-	return num;
+	return min + (max - min) * random01();
 }
 
 inline glm::vec3 random(const glm::vec3& min, const glm::vec3& max)
@@ -33,7 +28,7 @@ inline glm::vec3 randomInUnitSphere()
 {
 	glm::vec3 p;
 
-	do p = glm::vec3{ (float)random(-2, 2) };
+	do p = glm::vec3{ (float)random(-1, 1) };
 	while (glm::length2(p) >= 1.0f);
 
 	return p;
