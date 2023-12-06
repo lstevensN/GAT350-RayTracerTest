@@ -28,7 +28,7 @@ inline glm::vec3 randomInUnitSphere()
 {
 	glm::vec3 p;
 
-	do p = glm::vec3{ (float)random(-1, 1) };
+	do p = glm::vec3{ random(-1, 1) };
 	while (glm::length2(p) >= 1.0f);
 
 	return p;

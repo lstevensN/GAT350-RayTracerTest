@@ -36,7 +36,7 @@ void Scene::Render(Canvas& canvas, int numSamples, int depth)
 
 			// draw color to canvas point (pixel)
 			// get average color (average = (color + color + color) / number of samples)
-			//color /= numSamples;
+			color /= numSamples;
 			canvas.DrawPoint(pixel, color4_t(color, 1));
 		}
 	}
