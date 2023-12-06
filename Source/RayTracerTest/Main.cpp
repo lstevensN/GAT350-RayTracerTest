@@ -6,6 +6,7 @@
 #include "Renderer.h"
 #include "Scene.h"
 #include "Sphere.h"
+#include "Triangle.h"
 
 #include <iostream>
 
@@ -40,16 +41,19 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Material> material;
 
 	// create objects -> add to scene
-	for (int i = 0; i < 10; i++)
+	/*for (int i = 0; i < 10; i++)
 	{
-		material = (rand() % 2) ? std::dynamic_pointer_cast<Material>(lambertian) : std::dynamic_pointer_cast<Material>(metal);
+		material = (true) ? std::dynamic_pointer_cast<Material>(lambertian) : std::dynamic_pointer_cast<Material>(metal);
 		auto sphere = std::make_unique<Sphere>(glm::vec3{ random(-5, 5), random(-4, 4), -6}, 1.0f, material);
 		scene.AddObject(std::move(sphere));
 	}
-
+	*/
 	material = std::make_shared<Lambertian>(color3_t{ 0.2f });
 	auto plane = std::make_unique<Plane>(glm::vec3{ 0, -4, 0 }, glm::vec3{ 0, 1, 0 }, material);
 	scene.AddObject(std::move(plane));
+
+	auto triangle = std::make_unique<Triangle>(glm::vec3{ 2, -2, -3 }, glm::vec3{ 0, 2, -3 }, glm::vec3{ -2, -2, -3 }, lambertian);
+	scene.AddObject(std::move(triangle));
 
 	/*
 	// create material
