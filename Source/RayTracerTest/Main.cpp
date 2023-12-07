@@ -13,6 +13,8 @@
 
 using namespace std;
 
+void InitScene03(Scene& scene, const Canvas& canvas);  // Cornell Room
+
 int main(int argc, char* argv[])
 {
 	const int width = 400;
@@ -44,38 +46,8 @@ int main(int argc, char* argv[])
 	oldMaterial = std::make_shared<Lambertian>(color3_t{ 1 });
 	auto plane = std::make_unique<Plane>(glm::vec3{ 0, -4, 0 }, glm::vec3{ 0, 1, 0 }, oldMaterial);
 	scene.AddObject(std::move(plane));
-	
 
-	// walls
-	auto mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 1, 1 }));
-	mesh->Load("models/quad.obj", glm::vec3{ 0, 0, 0 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 6, 6, 6 });
-	scene.AddObject(std::move(mesh));
-
-	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 0.9f, 0.9f, 0.9f }));
-	mesh->Load("models/quad.obj", glm::vec3{ 0, 3, 3 }, glm::vec3{ 90, 0, 0 }, glm::vec3{ 6, 6, 16 });
-	scene.AddObject(std::move(mesh));
-
-	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 0, 0 }));
-	mesh->Load("models/quad.obj", glm::vec3{ -3, 0, 3 }, glm::vec3{ 0, 90, 0 }, glm::vec3{ 6, 6, 6 });
-	scene.AddObject(std::move(mesh));
-
-	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 0, 1, 0 }));
-	mesh->Load("models/quad.obj", glm::vec3{ 3, 0, 3 }, glm::vec3{ 0, -90, 0 }, glm::vec3{ 6, 6, 6 });
-	scene.AddObject(std::move(mesh));
-
-
-	// objects
-	mesh = std::make_unique<Mesh>(std::make_shared<Emissive>(glm::rgbColor(glm::vec3{ 1, 0, 1 }), 5.0f));
-	mesh->Load("models/cube.obj", glm::vec3{ 0, 3.45f, 3 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 1, 1, 1 });
-	scene.AddObject(std::move(mesh));
-
-	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1 }));
-	mesh->Load("models/cube.obj", glm::vec3{ 1, -3, 2 }, glm::vec3{ 0, -25, 0 }, glm::vec3{ 1, 1, 1 });
-	scene.AddObject(std::move(mesh));
-
-	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1 }));
-	mesh->Load("models/cube.obj", glm::vec3{ -1, -3, 1 }, glm::vec3{ 0, 25, 0 }, glm::vec3{ 1, 3, 1 });
-	scene.AddObject(std::move(mesh));
+	InitScene03(scene, canvas);
 
 	// render scene
 	canvas.Clear({ 0, 0, 0, 1 });
@@ -108,4 +80,38 @@ int main(int argc, char* argv[])
 	renderer.Shutdown();
 
 	return 0;
+}
+
+void InitScene03(Scene& scene, const Canvas& canvas)
+{
+	// walls
+	auto mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 1, 1 }));
+	mesh->Load("models/quad.obj", glm::vec3{ 0, 0, 0 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 6, 6, 6 });
+	scene.AddObject(std::move(mesh));
+
+	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 0.9f, 0.9f, 0.9f }));
+	mesh->Load("models/quad.obj", glm::vec3{ 0, 3, 3 }, glm::vec3{ 90, 0, 0 }, glm::vec3{ 6, 6, 16 });
+	scene.AddObject(std::move(mesh));
+
+	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 0, 0 }));
+	mesh->Load("models/quad.obj", glm::vec3{ -3, 0, 3 }, glm::vec3{ 0, 90, 0 }, glm::vec3{ 6, 6, 6 });
+	scene.AddObject(std::move(mesh));
+
+	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 0, 1, 0 }));
+	mesh->Load("models/quad.obj", glm::vec3{ 3, 0, 3 }, glm::vec3{ 0, -90, 0 }, glm::vec3{ 6, 6, 6 });
+	scene.AddObject(std::move(mesh));
+
+
+	// objects
+	mesh = std::make_unique<Mesh>(std::make_shared<Emissive>(glm::rgbColor(glm::vec3{ 1, 0, 1 }), 5.0f));
+	mesh->Load("models/cube.obj", glm::vec3{ 0, 3.45f, 3 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 1, 1, 1 });
+	scene.AddObject(std::move(mesh));
+
+	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1 }));
+	mesh->Load("models/cube.obj", glm::vec3{ 1, -3, 2 }, glm::vec3{ 0, -25, 0 }, glm::vec3{ 1, 1, 1 });
+	scene.AddObject(std::move(mesh));
+
+	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1 }));
+	mesh->Load("models/cube.obj", glm::vec3{ -1, -3, 1 }, glm::vec3{ 0, 25, 0 }, glm::vec3{ 1, 3, 1 });
+	scene.AddObject(std::move(mesh));
 }
