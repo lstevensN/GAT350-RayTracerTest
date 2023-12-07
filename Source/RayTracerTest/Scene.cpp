@@ -3,6 +3,8 @@
 #include "MathUtils.h"
 #include "Random.h"
 
+#include <iomanip>
+
 void Scene::Render(Canvas& canvas, int numSamples, int depth)
 {
 	// cast ray for each point (pixel) on the canvas
@@ -39,6 +41,8 @@ void Scene::Render(Canvas& canvas, int numSamples, int depth)
 			color /= numSamples;
 			canvas.DrawPoint(pixel, color4_t(color, 1));
 		}
+
+		std::cout << std::setprecision(2) << std::setw(5) << ((y / (float)canvas.GetSize().y) * 100) << "%\n";
 	}
 }
 
