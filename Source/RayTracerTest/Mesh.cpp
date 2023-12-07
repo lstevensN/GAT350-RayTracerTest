@@ -71,7 +71,7 @@ void Mesh::ProcessMesh(aiMesh* mesh, const aiScene* scene, const glm::mat4& tran
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
 		glm::vec3 position = transform * glm::vec4{ mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z, 1 };
-		positions[i] = position;
+		positions.push_back(position);
 	}
 
 	// get mesh index vertices
