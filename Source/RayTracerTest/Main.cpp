@@ -82,6 +82,11 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+void InitSceneFinal(Scene& scene, const Canvas& canvas)
+{
+
+}
+
 void InitScene03(Scene& scene, const Canvas& canvas)
 {
 	// walls
